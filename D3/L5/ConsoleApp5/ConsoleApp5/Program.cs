@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 public class Article
 {
@@ -30,6 +31,8 @@ public class Store
         this.articles = articles;
     }
 
+    public Article this[string productName] => articles.FirstOrDefault(article => article.ProductName == productName);
+
     public void DisplayArticle(int i)
     {
         if (i >= 0 && i < articles.Length)
@@ -55,6 +58,8 @@ public class Store
         }
         Console.WriteLine("Такого товара нету");
     }
+
+
 }
 
 class Program
@@ -76,6 +81,8 @@ class Program
 
         Console.Write("Введите имя товара: ");
         string productName = Console.ReadLine();
-        store.DisplayArticle(productName);
+        Article article = store[productName];
+        article.DisplayInfo();
+        //store.DisplayArticle(productName);
     }
 }
